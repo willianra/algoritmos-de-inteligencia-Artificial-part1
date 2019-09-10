@@ -1,0 +1,207 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication1;
+
+import java.util.LinkedList;
+
+/**
+ *
+ * @author Estudiante
+ */
+public class JavaApplication1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        System.out.println("COMPILANDO"); 
+        LinkedList<Integer>l1=new LinkedList<>();
+        LinkedList<Integer>l2=new LinkedList<>();
+        LinkedList<LinkedList<Integer>>l3=new LinkedList<LinkedList<Integer>>() ;
+        l1.add(1);
+        l1.add(2);
+        l1.add(3);
+        l1.add(4);
+        l1.add(5);
+        // LABORATORIO #1. EL PROBLEMA DE LOS SUMANDOS
+        //sumandos(l1, 10, 0);
+        //[0, 1, 2, 0, 1, 6]
+        //[0, 1, 2, 0, 3, 4]
+        //[0, 1, 2, 0, 7]
+        //[0, 1, 2, 2, 5]
+           
+        //SUMANDO DE UN ENTERO N 
+        //sumandos_de_un_entero_n(l1, 3, 0);
+        //System.out.println(suma(l1));
+        ///mochila 
+        //mochila(l1, l2, 5, 0);
+//COMPILANDO
+//[]
+//[1]
+//[1, 2]
+//[1, 3]
+//[1, 4]
+//[2]
+//[2, 3]
+//[3]
+//[4]
+//[5]
+//lista de listas
+       // ListaListas(l1, l2, l3, 10, 0);
+     //   System.out.println(l3);
+      //  COMPILANDO
+//[1, 1, 1, 1, 1]
+//[1, 1, 1, 1, 1, 1]
+//[1, 1, 1, 1, 1, 1]
+//COMBINATORIA
+  //      Combinatoria(l1, l2, 10, 2, 0);
+//COMPILANDO
+//[1, 2]
+//[1, 3]
+//[1, 4]
+//[1, 5]
+//[2, 3]
+//[2, 4]
+//[2, 5]
+//[3, 4]
+//[3, 5]
+//[4, 5]   
+//PERMUTACION
+//PERMUTACION(l1, l2, 10, 2, 0);
+//1, 1]
+//[1, 2]
+//[1, 3]
+//[1, 4]
+//[1, 5]
+//[2, 1]
+//[2, 2] 
+        
+    }
+    public static Integer suma (LinkedList<Integer>l1){
+        int s=0;
+        for (int i = 0; i < l1.size(); i++) {
+           s=s+l1.get(i);
+        }
+        return s;
+    }
+    public static void sumandos(LinkedList<Integer>l1,int n , int i ){
+        if (i>n) {///si el inicio es mayor al ala longitud que esta definida por n  termina el proceso 
+            return ;
+        }
+        
+        int suma=suma(l1);
+        if (suma>n) {
+            return ;
+            
+        }
+        if (suma==n) {
+            System.out.println(l1);
+            
+        }
+        int k=i;
+        while (k<=n) {            
+            l1.add(k);
+            sumandos(l1, n, k+1);
+            k++;
+            l1.removeLast();
+            k++;
+        }
+        
+    
+    }
+    //TAREA #1. SUMANDOS DE UN ENTERO N
+    public static void sumandos_de_un_entero_n(LinkedList<Integer>l1,int n ,int i){
+    
+     int suma=suma(l1);
+        if (suma>n) {
+            return ;
+            
+        }
+        if (suma==n) {System.out.println(l1);
+            return;
+        }
+        int k=i;
+        while (k<=n) {            
+            l1.add(k);
+            sumandos_de_un_entero_n(l1, n, k);
+            l1.removeLast();
+            k++;
+        }
+        
+    
+    }
+    
+    //MOCHILA
+    public static void mochila(LinkedList<Integer>l1,LinkedList<Integer> l2, int n , int i ){
+    
+    int suma=suma(l2);
+    if (suma>n) return ;
+    System.out.println(l2);
+    int k=i;
+    while(k<l1.size())
+    {
+     l2.add(l1.get(k));
+        mochila(l1, l2, n, k+1);
+        l2.removeLast();
+        k++;
+    }
+        
+    }
+    ///LISTA DE LISTAS 
+    public static void ListaListas(LinkedList<Integer>l1, LinkedList<Integer>l2,LinkedList<LinkedList<Integer>>l3,int m,int i){
+        if (i>l1.size()) {
+            return;
+            
+        }
+        int suma=suma(l2);
+        if(suma>m)return;
+        System.out.println(l2);
+        l3.add(new LinkedList(l2));
+        if(suma<=m){
+            System.out.println(l2);
+        }
+        int k=i;
+        while (k<=l1.size()) {            
+            l2.add(l1.get(k));
+            ListaListas(l1, l2, l3, m, k++);
+            l2.removeLast();
+            k++;
+        }
+        
+    }
+    ///COMBINATORIA CON REPETICION
+    public static void Combinatoria(LinkedList<Integer>l1,LinkedList<Integer>l2,int n ,int r ,int i ){
+        if (l2.size()==r) {
+            System.out.println(l2);
+            return;
+        }
+        int k=i;
+        while (k<l1.size()) {            
+            l2.add(l1.get(k));
+            Combinatoria(l1, l2, n, r, k+1);
+            l2.removeLast();
+            k++;
+        } 
+       
+    }
+    ///PERMUTACION 
+     public static void PERMUTACION(LinkedList<Integer>l1,LinkedList<Integer>l2,int n ,int r ,int i ){
+        if (l2.size()==r) {
+            System.out.println(l2);
+            return;
+        }
+        int k=0;
+        while (k<l1.size()) {            
+            l2.add(l1.get(k));
+            PERMUTACION(l1, l2, n, r, k);
+            l2.removeLast();
+            k++;
+        } 
+       
+    }
+    
+}
